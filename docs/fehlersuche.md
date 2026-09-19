@@ -24,7 +24,11 @@ groß. Weicht das stark ab, ist der Download kaputt.
 
 **3. Die Versionsangabe im Manifest passt nicht.** `strict_max_version`
 in `zotero-plugin/manifest.json` muss die eigene Zotero-Version
-einschließen. Bei Zotero 9 müsste dort etwa `9.*` stehen.
+einschließen. Zotero vergleicht dabei Teil für Teil, und `*` gilt als
+größer als jede Zahl: Mit `8.*` wird Zotero 9.0.6 abgelehnt, weil
+9 > 8 ist – obwohl die Datei völlig in Ordnung ist. Genau so ist diese
+Meldung hier beim ersten Anlauf entstanden. Abhilfe: Zahl anheben
+(derzeit `9.*`) und neu bauen.
 
 Was genau schiefging, steht im Fehlerprotokoll: **Hilfe →
 Debug-Ausgabe-Protokollierung → Ausgabe in Zwischenablage**.

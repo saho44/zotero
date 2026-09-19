@@ -1,14 +1,14 @@
 {
 	"manifest_version": 2,
 	"name": "Zotero Claude Bridge",
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"description": "Stellt deine Zotero-Bibliothek fuer die Claude-Browser-Erweiterung bereit (lokal, Token-geschuetzt).",
 	"homepage_url": "https://github.com/saho44/zotero",
 	"applications": {
 		"zotero": {
 			"id": "zotero-claude-bridge@saho44.github.io",
 			"strict_min_version": "7.0",
-			"strict_max_version": "8.*"
+			"strict_max_version": "9.*"
 		}
 	}
 }
