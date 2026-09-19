@@ -45,7 +45,7 @@ synchronisierte Bibliothek auf `zotero.org` ausweichen (siehe unten).
 Die fertigen Pakete liegen im Ordner [`dist/`](dist/) und lassen sich
 dort direkt herunterladen:
 
-* `zotero-claude-bridge-0.1.0.xpi` – das Zotero-Plugin
+* `zotero-claude-bridge-0.1.1.xpi` – das Zotero-Plugin
 * `zotero-fuer-claude-0.1.0.zip` – die Browser-Erweiterung
 
 Auf GitHub: Datei anklicken, dann oben rechts auf **Download raw file**.
@@ -70,7 +70,7 @@ Unterordner – sonst lehnt Zotero die Datei ab.
 1. Zotero öffnen
 2. **Werkzeuge → Add-ons**
 3. Oben auf das Zahnrad klicken → **Install Add-on From File …**
-4. Die Datei `build/zotero-claude-bridge-0.1.0.xpi` auswählen
+4. Die Datei `build/zotero-claude-bridge-0.1.1.xpi` auswählen
 5. Zotero neu starten
 
 ### Schritt 3 – Token kopieren
