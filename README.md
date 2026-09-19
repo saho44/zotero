@@ -45,7 +45,7 @@ synchronisierte Bibliothek auf `zotero.org` ausweichen (siehe unten).
 Die fertigen Pakete liegen im Ordner [`dist/`](dist/) und lassen sich
 dort direkt herunterladen:
 
-* `zotero-claude-bridge-0.1.2.xpi` – das Zotero-Plugin
+* `zotero-claude-bridge-0.1.3.xpi` – das Zotero-Plugin
 * `zotero-fuer-claude-0.1.0.zip` – die Browser-Erweiterung
 
 Auf GitHub: Datei anklicken, dann oben rechts auf **Download raw file**.
@@ -76,7 +76,7 @@ Unterordner – sonst lehnt Zotero die Datei ab.
 1. Zotero öffnen
 2. **Werkzeuge → Add-ons**
 3. Oben auf das Zahnrad klicken → **Install Add-on From File …**
-4. Die Datei `build/zotero-claude-bridge-0.1.2.xpi` auswählen
+4. Die Datei `build/zotero-claude-bridge-0.1.3.xpi` auswählen
 5. Zotero neu starten
 
 ### Schritt 3 – Token kopieren
@@ -126,6 +126,41 @@ eingeschränkt. Ein Klick auf einen Treffer klappt die Aktionen auf:
 Über die Kästchen links lassen sich mehrere Treffer auswählen und
 gemeinsam als **Literaturverzeichnis**, **Kurzinfos** oder **BibTeX**
 einfügen.
+
+## Ohne Installationsrechte: nur über zotero.org
+
+Lässt sich das Zotero-Plugin nicht installieren – etwa auf einem
+verwalteten Dienstrechner –, funktioniert die Erweiterung auch allein
+mit deiner synchronisierten Online-Bibliothek. Eine Browser-Erweiterung
+im Entwicklermodus zu laden erfordert keine Administratorrechte.
+
+1. Auf <https://www.zotero.org/settings/keys> auf **Create new private
+   key** klicken, Leserechte genügen. Den Schlüssel sofort kopieren –
+   er wird nur einmal angezeigt. Die **Benutzer-ID** (eine Zahl) steht
+   auf derselben Seite unter *Your userID for use in API calls*.
+2. In den Einstellungen der Erweiterung unter *Reserve über zotero.org*
+   den Haken setzen, Benutzer-ID und Schlüssel eintragen, **Speichern**.
+3. **Online-Zugang testen** – es sollte „Online-Zugang funktioniert“
+   erscheinen.
+
+Das Feld für das Zotero-Token bleibt dabei leer. Die Erweiterung
+versucht zuerst das lokale Zotero, scheitert dort sofort und benutzt
+danach die Online-Bibliothek.
+
+Was in diesem Modus fehlt:
+
+| Funktion | Online verfügbar |
+| --- | --- |
+| Suche, Metadaten, Abstract | ja |
+| Zitate und Literaturverzeichnis | ja |
+| Notizen | ja |
+| BibTeX und RIS | ja |
+| PDF-Volltext | nur wenn Zotero ihn synchronisiert hat |
+| PDF-Anmerkungen (Markierungen) | nein |
+| Eigene Zitierstile aus Zotero | nein, nur eine Standardauswahl |
+
+Vorausgesetzt ist, dass deine Bibliothek tatsächlich mit zotero.org
+synchronisiert ist (in Zotero unter *Einstellungen → Sync*).
 
 ## Reserve über zotero.org (optional)
 

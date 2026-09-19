@@ -300,7 +300,7 @@
 
 		if (web.connected) {
 			bar.classList.add("zfc-status-warn");
-			bar.textContent = "Zotero läuft nicht – benutze zotero.org (eingeschränkt)";
+			bar.textContent = "Ohne Zotero-Plugin – Daten kommen von zotero.org";
 			return;
 		}
 
