@@ -7,6 +7,28 @@
 3. Bei Fehlern dort auf **Fehler** klicken – oder mit F12 die Konsole
    der Seite öffnen und nach `Zotero für Claude` suchen.
 
+## „Die Erweiterung konnte nicht installiert werden. Sie ist eventuell inkompatibel mit dieser Version von Zotero.“
+
+Diese Meldung erscheint beim Installieren der `.xpi` und hat in aller
+Regel eine von drei Ursachen.
+
+**1. Zotero 6 statt Zotero 7.** Zotero 6 benutzt ein völlig anderes
+Plugin-Format. Die eigene Version steht unter **Hilfe → Über Zotero**.
+Steht dort eine 6, hilft nur ein Update auf Zotero 7.
+
+**2. Die heruntergeladene Datei ist keine echte `.xpi`.** Wer auf GitHub
+die Datei nur anklickt, lädt unter Umständen die HTML-Ansicht herunter.
+Richtig ist der Knopf **Download raw file**. Prüfen lässt sich das an
+der Dateigröße: Rechtsklick → Eigenschaften. Die Datei ist rund 11 KB
+groß. Weicht das stark ab, ist der Download kaputt.
+
+**3. Die Versionsangabe im Manifest passt nicht.** `strict_max_version`
+in `zotero-plugin/manifest.json` muss die eigene Zotero-Version
+einschließen. Bei Zotero 9 müsste dort etwa `9.*` stehen.
+
+Was genau schiefging, steht im Fehlerprotokoll: **Hilfe →
+Debug-Ausgabe-Protokollierung → Ausgabe in Zwischenablage**.
+
 ## „Zotero ist nicht erreichbar“
 
 * Läuft Zotero? Das Programm muss geöffnet sein.
