@@ -1,5 +1,7 @@
 build/
 node_modules/
-*.xpi
-*.zip
+# Die fertigen Pakete in dist/ sind absichtlich eingecheckt,
+# damit man sie ohne eigenen Bau herunterladen kann.
+/*.xpi
+/*.zip
 .DS_Store

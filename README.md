@@ -40,19 +40,30 @@ synchronisierte Bibliothek auf `zotero.org` ausweichen (siehe unten).
 * Zotero 7 (oder neuer) auf dem Rechner installiert
 * Chrome oder Edge
 
-### Schritt 1 – Pakete bauen
+### Schritt 1 – Pakete besorgen
 
-```bash
-./scripts/build.sh
-```
-
-Danach liegen im Ordner `build/`:
+Die fertigen Pakete liegen im Ordner [`dist/`](dist/) und lassen sich
+dort direkt herunterladen:
 
 * `zotero-claude-bridge-0.1.0.xpi` – das Zotero-Plugin
 * `zotero-fuer-claude-0.1.0.zip` – die Browser-Erweiterung
 
-Ohne Node.js und Python geht es auch von Hand: den Inhalt von
-`zotero-plugin/` in eine ZIP-Datei packen und auf `.xpi` umbenennen.
+Auf GitHub: Datei anklicken, dann oben rechts auf **Download raw file**.
+
+Selbst bauen (nur nötig, wenn du etwas am Code geändert hast):
+
+| System | Befehl |
+| --- | --- |
+| Windows | Doppelklick auf `scripts\build.cmd` |
+| macOS, Linux | `./scripts/build.sh` |
+
+Die Pakete landen dann im Ordner `build/`.
+
+Ganz ohne Skript geht es auch von Hand: den **Inhalt** von
+`zotero-plugin/` (also `manifest.json`, `bootstrap.js`, `src`, `chrome`)
+in eine ZIP-Datei packen und diese auf `.xpi` umbenennen. Wichtig ist,
+dass `manifest.json` im Archiv ganz oben liegt und nicht in einem
+Unterordner – sonst lehnt Zotero die Datei ab.
 
 ### Schritt 2 – Zotero-Plugin installieren
 
@@ -73,7 +84,7 @@ Fenster zeigt außerdem, ob der lokale Server läuft.
 
 1. `build/zotero-fuer-claude-0.1.0.zip` in einen Ordner entpacken
    (alternativ direkt den Ordner `extension/` verwenden)
-2. In Chrome/Edge `chrome://extensions` öffnen
+2. In Chrome/Edge `chrome://extensions` öffnen (Adresse eintippen)
 3. Rechts oben **Entwicklermodus** einschalten
 4. **Entpackte Erweiterung laden** und den Ordner auswählen
 
@@ -149,6 +160,7 @@ Die HTTP-Schnittstelle des Plugins ist in
 ## Entwicklung
 
 ```
+dist/                   Fertige Pakete zum Herunterladen
 zotero-plugin/
   bootstrap.js          Start/Stop des Plugins in Zotero 7
   src/api.js            Lesezugriff auf die Bibliothek
@@ -159,7 +171,8 @@ extension/
   content/sidebar.js    Seitenleiste auf claude.ai (Shadow DOM)
   options/, popup/      Einstellungen und Statusfenster
 scripts/
-  build.sh              Baut .xpi und .zip
+  build.sh              Baut .xpi und .zip (macOS, Linux)
+  build.cmd/.ps1        Dasselbe für Windows
   make-icons.py         Erzeugt die Symbole
 tests/
   plugin-smoke-test.mjs Plugin-Endpunkte gegen ein nachgebildetes Zotero
