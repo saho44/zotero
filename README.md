@@ -92,7 +92,12 @@ Fenster zeigt außerdem, ob der lokale Server läuft.
    (alternativ direkt den Ordner `extension/` verwenden)
 2. In Chrome/Edge `chrome://extensions` öffnen (Adresse eintippen)
 3. Rechts oben **Entwicklermodus** einschalten
-4. **Entpackte Erweiterung laden** und den Ordner auswählen
+4. **Entpackte Erweiterung laden** und den entpackten Ordner auswählen
+
+> Im Auswahldialog erscheint keine `manifest.json` – Ordnerdialoge zeigen
+> nie Dateien an. Dass dort `background`, `content`, `icons`, `options`
+> und `popup` stehen, heißt: richtige Stelle. Auf **Ordner auswählen**
+> klicken.
 
 ### Schritt 5 – Token eintragen
 

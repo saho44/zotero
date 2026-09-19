@@ -7,6 +7,33 @@
 3. Bei Fehlern dort auf **Fehler** klicken – oder mit F12 die Konsole
    der Seite öffnen und nach `Zotero für Claude` suchen.
 
+## Im Auswahldialog von Chrome fehlt die manifest.json
+
+Sie fehlt nicht – **Ordner-Auswahldialoge zeigen grundsätzlich keine
+Dateien an**, nur Ordner. Dass im Dialog nur `background`, `content`,
+`icons`, `options` und `popup` stehen, ist genau richtig: Diese fünf
+Ordner sind der Beleg, dass man an der richtigen Stelle steht.
+
+Einfach unten auf **Ordner auswählen** klicken. Chrome prüft die
+`manifest.json` erst danach.
+
+## „Fehler beim Laden der Erweiterung – Die Manifestdatei fehlt oder ist nicht lesbar.“
+
+Diese Meldung kommt von Chrome oder Edge, nicht von Zotero. Drei
+Ursachen, der Häufigkeit nach:
+
+1. **Der falsche Ordner ist ausgewählt.** Gebraucht wird der entpackte
+   Ordner der Browser-Erweiterung, in dem `manifest.json` direkt liegt –
+   nicht der Ordner mit den `.xpi`-Dateien, die zu Zotero gehören.
+2. **Die ZIP-Datei wurde nie entpackt.** Windows zeigt ein Archiv beim
+   Doppelklick wie einen Ordner an, aber Chrome kann daraus nicht laden.
+   Ob man im Archiv steht, verrät die Adressleiste: Enthält der Pfad
+   `.zip\`, erst über **Alle extrahieren…** auspacken.
+3. **Der Ordner liegt in OneDrive.** Chrome liest ihn bei jedem Start.
+   Lagert OneDrive die Dateien in die Cloud aus, ist die `manifest.json`
+   zwar sichtbar, aber nicht mehr lesbar. Der Ordner gehört an einen
+   gewöhnlichen lokalen Ort und muss dort liegen bleiben.
+
 ## „Die Erweiterung konnte nicht installiert werden. Sie ist eventuell inkompatibel mit dieser Version von Zotero.“
 
 Diese Meldung erscheint beim Installieren der `.xpi` und hat in aller
