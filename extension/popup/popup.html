@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+	<meta charset="utf-8">
+	<title>Zotero für Claude</title>
+	<link rel="stylesheet" href="../options/options.css">
+	<style>
+		body { padding: 16px; width: 300px; }
+		h1 { font-size: 15px; margin-bottom: 12px; }
+		.card { padding: 12px; margin-bottom: 12px; }
+		.line { display: flex; justify-content: space-between; gap: 8px; font-size: 12.5px; }
+		.line + .line { margin-top: 6px; }
+		.actions { margin-top: 0; }
+		button { width: 100%; }
+	</style>
+</head>
+<body>
+	<h1><span class="mark">Z</span> Zotero für Claude</h1>
+
+	<div class="card">
+		<div class="line"><span>Zotero auf diesem Rechner</span><strong id="local">…</strong></div>
+		<div class="line"><span>zotero.org (Reserve)</span><strong id="web">…</strong></div>
+		<p class="hint" id="message"></p>
+	</div>
+
+	<div class="actions">
+		<button id="options" type="button" class="primary">Einstellungen öffnen</button>
+	</div>
+	<p class="hint" style="margin-top: 12px;">
+		Auf claude.ai öffnest du die Seitenleiste mit dem Knopf am rechten Rand
+		oder mit <strong>Alt&nbsp;+&nbsp;Z</strong>.
+	</p>
+
+	<script src="popup.js" type="module"></script>
+</body>
+</html>

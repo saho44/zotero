@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<window xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+		xmlns:html="http://www.w3.org/1999/xhtml"
+		title="Claude-Verbindung"
+		width="560"
+		height="440"
+		onload="ZoteroClaudeDialog.load();">
+
+	<script src="chrome://zoteroclaude/content/connection.js"/>
+
+	<vbox flex="1" style="padding: 16px; gap: 12px;">
+		<html:h2 style="margin: 0;">Zotero mit Claude im Browser verbinden</html:h2>
+
+		<html:p style="margin: 0; line-height: 1.5;">
+			Trage das folgende Token in den Einstellungen der Chrome-/Edge-Erweiterung
+			<html:em>Zotero fuer Claude</html:em> ein. Es sorgt dafuer, dass nur diese
+			Erweiterung deine Bibliothek lesen darf.
+		</html:p>
+
+		<groupbox>
+			<html:label style="font-weight: bold;">Verbindungs-Token</html:label>
+			<hbox align="center" style="gap: 8px;">
+				<html:input id="token-field" type="text" readonly="readonly"
+						style="flex: 1; font-family: monospace; padding: 6px;"/>
+				<button id="copy-button" label="Kopieren" oncommand="ZoteroClaudeDialog.copyToken();"/>
+			</hbox>
+			<hbox align="center" style="gap: 8px; margin-top: 8px;">
+				<button id="regenerate-button" label="Neues Token erzeugen"
+						oncommand="ZoteroClaudeDialog.regenerate();"/>
+				<html:span id="copy-status" style="opacity: 0.75;"></html:span>
+			</hbox>
+		</groupbox>
+
+		<groupbox>
+			<html:label style="font-weight: bold;">Status</html:label>
+			<html:div id="status-text" style="line-height: 1.6;"></html:div>
+		</groupbox>
+
+		<groupbox>
+			<hbox align="center" style="gap: 8px;">
+				<checkbox id="enabled-checkbox" label="Claude-Verbindung aktiv"
+						oncommand="ZoteroClaudeDialog.toggleEnabled();"/>
+			</hbox>
+			<html:p style="margin: 4px 0 0 0; opacity: 0.75;">
+				Deaktiviert beantwortet Zotero keine Anfragen der Erweiterung mehr.
+			</html:p>
+		</groupbox>
+
+		<spacer flex="1"/>
+
+		<hbox pack="end">
+			<button label="Schliessen" oncommand="window.close();"/>
+		</hbox>
+	</vbox>
+</window>

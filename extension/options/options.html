@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+	<meta charset="utf-8">
+	<title>Zotero für Claude – Einstellungen</title>
+	<link rel="stylesheet" href="options.css">
+</head>
+<body>
+	<main>
+		<h1><span class="mark">Z</span> Zotero für Claude</h1>
+
+		<section class="card">
+			<h2>1. Verbindung zu Zotero</h2>
+			<p class="hint">
+				Öffne in Zotero <strong>Werkzeuge → Claude-Verbindung …</strong>, kopiere
+				das dort angezeigte Token und füge es hier ein.
+			</p>
+
+			<label for="token">Verbindungs-Token</label>
+			<input id="token" type="text" autocomplete="off" spellcheck="false"
+				placeholder="z. B. 8f3a…">
+
+			<label for="port">Port des lokalen Zotero-Servers</label>
+			<input id="port" type="number" min="1" max="65535" step="1">
+			<p class="hint">Standard ist 23119. Nur ändern, wenn du ihn in Zotero umgestellt hast.</p>
+
+			<div class="row">
+				<button id="test" type="button" class="primary">Verbindung testen</button>
+				<span id="test-status" class="status"></span>
+			</div>
+		</section>
+
+		<section class="card">
+			<h2>2. Zitate</h2>
+
+			<label for="style">Zitierstil</label>
+			<select id="style"></select>
+			<p class="hint" id="style-hint">
+				Die Liste kommt aus deinem Zotero. Weitere Stile installierst du in Zotero
+				unter Einstellungen → Zitieren.
+			</p>
+
+			<label for="locale">Sprache der Zitate</label>
+			<select id="locale">
+				<option value="de-DE">Deutsch</option>
+				<option value="en-US">Englisch (US)</option>
+				<option value="en-GB">Englisch (GB)</option>
+				<option value="fr-FR">Französisch</option>
+				<option value="it-IT">Italienisch</option>
+				<option value="es-ES">Spanisch</option>
+			</select>
+		</section>
+
+		<section class="card">
+			<h2>3. Volltext</h2>
+
+			<label for="fulltextChars">Maximale Zeichenzahl beim Einfügen von PDF-Text</label>
+			<input id="fulltextChars" type="number" min="1000" max="200000" step="1000">
+			<p class="hint">
+				Rund 20 000 Zeichen entsprechen etwa 8 Buchseiten. Höhere Werte füllen das
+				Kontextfenster von Claude schneller.
+			</p>
+		</section>
+
+		<section class="card">
+			<h2>4. Reserve über zotero.org <span class="optional">optional</span></h2>
+			<p class="hint">
+				Falls Zotero auf diesem Rechner gerade nicht läuft, kann die Erweiterung auf
+				deine synchronisierte Online-Bibliothek ausweichen. PDF-Anmerkungen und
+				beliebige Exportformate stehen dabei nicht zur Verfügung.
+			</p>
+
+			<label class="checkbox">
+				<input id="useWebFallback" type="checkbox">
+				Online-Reserve verwenden
+			</label>
+
+			<label for="webUserID">Benutzer-ID</label>
+			<input id="webUserID" type="text" autocomplete="off" spellcheck="false"
+				placeholder="z. B. 1234567">
+
+			<label for="webApiKey">API-Schlüssel</label>
+			<input id="webApiKey" type="password" autocomplete="off" spellcheck="false">
+
+			<p class="hint">
+				Beides findest du auf
+				<a href="https://www.zotero.org/settings/keys" target="_blank" rel="noopener">
+					zotero.org/settings/keys</a>. Ein Schlüssel mit Leserechten genügt.
+			</p>
+
+			<div class="row">
+				<button id="test-web" type="button">Online-Zugang testen</button>
+				<span id="test-web-status" class="status"></span>
+			</div>
+		</section>
+
+		<div class="actions">
+			<button id="save" type="button" class="primary">Speichern</button>
+			<span id="save-status" class="status"></span>
+		</div>
+	</main>
+
+	<script src="options.js" type="module"></script>
+</body>
+</html>

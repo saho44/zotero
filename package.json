@@ -1,0 +1,13 @@
+{
+	"name": "zotero-claude",
+	"version": "0.1.0",
+	"private": true,
+	"description": "Zotero mit Claude im Browser verbinden: Zotero-Plugin und Chrome-/Edge-Erweiterung",
+	"type": "module",
+	"scripts": {
+		"build": "bash scripts/build.sh",
+		"icons": "python3 scripts/make-icons.py",
+		"test": "node tests/plugin-smoke-test.mjs && node tests/format-test.mjs"
+	},
+	"license": "MIT"
+}

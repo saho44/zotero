@@ -1,0 +1,393 @@
+/* Stile der Zotero-Seitenleiste. Laufen im Shadow DOM, deshalb kurze
+   Klassennamen ohne Rücksicht auf die Stile von claude.ai. */
+
+:host,
+* {
+	box-sizing: border-box;
+}
+
+:host {
+	--zfc-bg: #ffffff;
+	--zfc-bg-soft: #f6f5f2;
+	--zfc-border: #e0ddd6;
+	--zfc-text: #1f1e1c;
+	--zfc-text-soft: #6b675f;
+	--zfc-accent: #c1442e;
+	--zfc-accent-soft: #fbeae6;
+	--zfc-ok: #1c7c4a;
+	--zfc-warn: #8a6100;
+	--zfc-error: #b3261e;
+	--zfc-shadow: 0 8px 32px rgba(0, 0, 0, 0.16);
+	--zfc-radius: 10px;
+
+	font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+	font-size: 14px;
+	line-height: 1.45;
+	color: var(--zfc-text);
+}
+
+@media (prefers-color-scheme: dark) {
+	:host {
+		--zfc-bg: #26241f;
+		--zfc-bg-soft: #302d27;
+		--zfc-border: #45413a;
+		--zfc-text: #f0eee8;
+		--zfc-text-soft: #a8a297;
+		--zfc-accent: #e0785f;
+		--zfc-accent-soft: #3b2a25;
+		--zfc-ok: #6ccf9a;
+		--zfc-warn: #e0bb6a;
+		--zfc-error: #ef8a80;
+		--zfc-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+	}
+}
+
+/* ---------------------------------------------------------------- Knopf */
+
+.zfc-launcher {
+	position: fixed;
+	right: 0;
+	top: 50%;
+	transform: translateY(-50%);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 4px;
+	padding: 12px 6px;
+	border: 1px solid var(--zfc-border);
+	border-right: none;
+	border-radius: var(--zfc-radius) 0 0 var(--zfc-radius);
+	background: var(--zfc-bg);
+	color: var(--zfc-text);
+	box-shadow: var(--zfc-shadow);
+	cursor: pointer;
+	font: inherit;
+	transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.zfc-launcher:hover {
+	background: var(--zfc-accent-soft);
+	transform: translateY(-50%) translateX(-2px);
+}
+
+.zfc-launcher-hidden {
+	display: none;
+}
+
+.zfc-launcher-mark,
+.zfc-mark {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 22px;
+	height: 22px;
+	border-radius: 6px;
+	background: var(--zfc-accent);
+	color: #fff;
+	font-weight: 700;
+	font-size: 13px;
+}
+
+.zfc-launcher-label {
+	writing-mode: vertical-rl;
+	font-size: 11px;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--zfc-text-soft);
+}
+
+/* -------------------------------------------------------------- Panel */
+
+.zfc-panel {
+	position: fixed;
+	top: 0;
+	right: 0;
+	width: 400px;
+	max-width: 100vw;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	background: var(--zfc-bg);
+	border-left: 1px solid var(--zfc-border);
+	box-shadow: var(--zfc-shadow);
+	transform: translateX(100%);
+	transition: transform 0.2s ease;
+	visibility: hidden;
+}
+
+.zfc-panel-open {
+	transform: translateX(0);
+	visibility: visible;
+}
+
+.zfc-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 8px;
+	padding: 12px 14px;
+	border-bottom: 1px solid var(--zfc-border);
+}
+
+.zfc-heading {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.zfc-title {
+	font-weight: 600;
+	font-size: 15px;
+}
+
+.zfc-header-actions {
+	display: flex;
+	gap: 4px;
+}
+
+.zfc-icon-button {
+	width: 28px;
+	height: 28px;
+	border: none;
+	border-radius: 6px;
+	background: transparent;
+	color: var(--zfc-text-soft);
+	font-size: 16px;
+	line-height: 1;
+	cursor: pointer;
+}
+
+.zfc-icon-button:hover {
+	background: var(--zfc-bg-soft);
+	color: var(--zfc-text);
+}
+
+/* -------------------------------------------------------------- Status */
+
+.zfc-status {
+	padding: 8px 14px;
+	font-size: 12px;
+	border-bottom: 1px solid var(--zfc-border);
+	background: var(--zfc-bg-soft);
+	color: var(--zfc-text-soft);
+}
+
+.zfc-status-ok {
+	color: var(--zfc-ok);
+}
+
+.zfc-status-warn {
+	color: var(--zfc-warn);
+}
+
+.zfc-status-error {
+	color: var(--zfc-error);
+}
+
+.zfc-link {
+	border: none;
+	background: none;
+	padding: 0;
+	color: inherit;
+	font: inherit;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+/* -------------------------------------------------------------- Suche */
+
+.zfc-search {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	padding: 12px 14px;
+	border-bottom: 1px solid var(--zfc-border);
+}
+
+.zfc-input,
+.zfc-select {
+	width: 100%;
+	padding: 8px 10px;
+	border: 1px solid var(--zfc-border);
+	border-radius: 8px;
+	background: var(--zfc-bg);
+	color: var(--zfc-text);
+	font: inherit;
+}
+
+.zfc-input:focus,
+.zfc-select:focus {
+	outline: 2px solid var(--zfc-accent);
+	outline-offset: -1px;
+}
+
+/* ----------------------------------------------------------- Ergebnisse */
+
+.zfc-results {
+	flex: 1;
+	overflow-y: auto;
+	padding: 8px;
+}
+
+.zfc-placeholder {
+	padding: 24px 16px;
+	text-align: center;
+	color: var(--zfc-text-soft);
+	font-size: 13px;
+}
+
+.zfc-card {
+	border: 1px solid var(--zfc-border);
+	border-radius: var(--zfc-radius);
+	margin-bottom: 8px;
+	background: var(--zfc-bg);
+	overflow: hidden;
+}
+
+.zfc-card-expanded {
+	border-color: var(--zfc-accent);
+}
+
+.zfc-card-top {
+	display: flex;
+	gap: 10px;
+	padding: 10px 12px;
+	cursor: pointer;
+}
+
+.zfc-card-top:hover {
+	background: var(--zfc-bg-soft);
+}
+
+.zfc-checkbox {
+	margin-top: 3px;
+	accent-color: var(--zfc-accent);
+	flex: none;
+}
+
+.zfc-card-main {
+	min-width: 0;
+}
+
+.zfc-card-title {
+	margin: 0 0 2px;
+	font-size: 13.5px;
+	font-weight: 600;
+	line-height: 1.35;
+}
+
+.zfc-card-subtitle {
+	margin: 0;
+	font-size: 12px;
+	color: var(--zfc-text-soft);
+}
+
+.zfc-badges {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px;
+	margin-top: 6px;
+}
+
+.zfc-badge {
+	padding: 1px 6px;
+	border-radius: 999px;
+	background: var(--zfc-bg-soft);
+	border: 1px solid var(--zfc-border);
+	font-size: 10.5px;
+	color: var(--zfc-text-soft);
+}
+
+.zfc-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	padding: 0 12px 12px;
+}
+
+.zfc-chip {
+	padding: 4px 10px;
+	border: 1px solid var(--zfc-border);
+	border-radius: 999px;
+	background: var(--zfc-bg-soft);
+	color: var(--zfc-text);
+	font: inherit;
+	font-size: 12px;
+	cursor: pointer;
+}
+
+.zfc-chip:hover:not(:disabled) {
+	background: var(--zfc-accent);
+	border-color: var(--zfc-accent);
+	color: #fff;
+}
+
+.zfc-chip:disabled {
+	opacity: 0.6;
+	cursor: default;
+}
+
+/* -------------------------------------------------------------- Fußzeile */
+
+.zfc-footer {
+	display: none;
+	flex-direction: column;
+	gap: 8px;
+	padding: 10px 14px;
+	border-top: 1px solid var(--zfc-border);
+	background: var(--zfc-bg-soft);
+}
+
+.zfc-footer-visible {
+	display: flex;
+}
+
+.zfc-footer-count {
+	font-size: 12px;
+	color: var(--zfc-text-soft);
+}
+
+.zfc-footer-actions {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 6px;
+}
+
+/* ------------------------------------------------------------ Hinweise */
+
+.zfc-toast {
+	position: absolute;
+	left: 14px;
+	right: 14px;
+	bottom: 14px;
+	padding: 10px 12px;
+	border-radius: 8px;
+	background: var(--zfc-text);
+	color: var(--zfc-bg);
+	font-size: 12.5px;
+	opacity: 0;
+	transform: translateY(8px);
+	pointer-events: none;
+	transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.zfc-toast-visible {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+.zfc-toast-error {
+	background: var(--zfc-error);
+	color: #fff;
+}
+
+.zfc-toast-warn {
+	background: var(--zfc-warn);
+	color: #fff;
+}
+
+.zfc-toast-ok {
+	background: var(--zfc-ok);
+	color: #fff;
+}
