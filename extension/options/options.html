@@ -31,7 +31,24 @@
 		</section>
 
 		<section class="card">
-			<h2>2. Zitate</h2>
+			<h2>2. Suche</h2>
+
+			<label for="searchMode">Welche Felder durchsucht werden</label>
+			<select id="searchMode">
+				<option value="everything">Alles – auch Abstract, Notizen, Tags, Zeitschrift, Verlag, PDF-Volltext</option>
+				<option value="titleCreatorYear">Nur Titel, Autor:innen und Jahr</option>
+			</select>
+			<p class="hint">
+				„Alles“ findet deutlich mehr, aber auch mehr Nebentreffer, und ist etwas
+				langsamer. In der Seitenleiste lässt sich für eine einzelne Suche jederzeit
+				umgeschaltet werden – diese Einstellung ist nur die Voreinstellung.
+				Der PDF-Volltext zählt nur mit, wenn Zotero ihn indiziert beziehungsweise
+				zu zotero.org synchronisiert hat.
+			</p>
+		</section>
+
+		<section class="card">
+			<h2>3. Zitate</h2>
 
 			<label for="style">Zitierstil</label>
 			<select id="style"></select>
@@ -52,7 +69,7 @@
 		</section>
 
 		<section class="card">
-			<h2>3. Volltext</h2>
+			<h2>4. Volltext</h2>
 
 			<label for="fulltextChars">Maximale Zeichenzahl beim Einfügen von PDF-Text</label>
 			<input id="fulltextChars" type="number" min="1000" max="200000" step="1000">
@@ -63,7 +80,7 @@
 		</section>
 
 		<section class="card">
-			<h2>4. Reserve über zotero.org <span class="optional">optional</span></h2>
+			<h2>5. Reserve über zotero.org <span class="optional">optional</span></h2>
 			<p class="hint">
 				Falls Zotero auf diesem Rechner gerade nicht läuft, kann die Erweiterung auf
 				deine synchronisierte Online-Bibliothek ausweichen. PDF-Anmerkungen und

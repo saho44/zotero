@@ -164,10 +164,12 @@ export const web = {
 		return { ok: true, source: "web" };
 	},
 
-	async search({ query, limit, style, locale }) {
+	async search({ query, limit, style, locale, mode }) {
 		const entries = await request("/items/top", {
 			q: query || "",
-			qmode: "titleCreatorYear",
+			// "everything" schliesst Abstract, Notizen, Tags, Zeitschrift,
+			// Verlag und den synchronisierten PDF-Volltext ein.
+			qmode: mode === "titleCreatorYear" ? "titleCreatorYear" : "everything",
 			limit: Math.min(Number(limit) || 20, 100),
 			format: "json",
 			include: "data,bib,citation",

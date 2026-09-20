@@ -177,6 +177,10 @@ export function buildZotero() {
 
 	const prefs = new Map();
 
+	// Bedingungen der zuletzt ausgefuehrten Suche - damit der Test pruefen kann,
+	// welcher Suchumfang tatsaechlich angekommen ist.
+	let lastSearchConditions = [];
+
 	class FakeSearch {
 		constructor() {
 			this.conditions = [];
@@ -188,6 +192,7 @@ export function buildZotero() {
 		}
 
 		async search() {
+			lastSearchConditions = this.conditions;
 			const quick = this.conditions.find(c => String(c.condition).startsWith("quicksearch"));
 			let result = [...registry.values()].filter(item => item.isRegularItem());
 			if (quick) {
@@ -211,6 +216,11 @@ export function buildZotero() {
 
 		/** Vom Plugin gemeldete Fehler, damit der Test sie prüfen kann. */
 		errors,
+
+		/** Bedingungen der zuletzt ausgeführten Suche. */
+		get lastSearchConditions() {
+			return lastSearchConditions;
+		},
 
 		debug() {},
 		logError(e) {

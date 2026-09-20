@@ -255,7 +255,10 @@ const handlers = {
 	},
 
 	async search({ query, collectionKey, limit, mode }) {
-		return withFallback("search", { query, collectionKey, limit, mode });
+		const settings = await getSettings();
+		// Ohne ausdruecklichen Wunsch gilt die Voreinstellung aus den Optionen.
+		const searchMode = mode || settings.searchMode;
+		return withFallback("search", { query, collectionKey, limit, mode: searchMode });
 	},
 
 	async collections() {

@@ -46,7 +46,7 @@ Die fertigen Pakete liegen im Ordner [`dist/`](dist/) und lassen sich
 dort direkt herunterladen:
 
 * `zotero-claude-bridge-0.1.3.xpi` – das Zotero-Plugin
-* `zotero-fuer-claude-0.1.1.zip` – die Browser-Erweiterung
+* `zotero-fuer-claude-0.1.2.zip` – die Browser-Erweiterung
 
 Auf GitHub: Datei anklicken, dann oben rechts auf **Download raw file**.
 
@@ -88,7 +88,7 @@ Fenster zeigt außerdem, ob der lokale Server läuft.
 
 ### Schritt 4 – Browser-Erweiterung installieren
 
-1. `build/zotero-fuer-claude-0.1.1.zip` in einen Ordner entpacken
+1. `build/zotero-fuer-claude-0.1.2.zip` in einen Ordner entpacken
    (alternativ direkt den Ordner `extension/` verwenden)
 2. In Chrome/Edge `chrome://extensions` öffnen (Adresse eintippen)
 3. Rechts oben **Entwicklermodus** einschalten
@@ -113,8 +113,19 @@ ein **Z**-Knopf, der die Seitenleiste öffnet – oder **Alt + Z**.
 
 ## Was die Seitenleiste kann
 
-Suche nach Titel, Autor:in oder Jahr; optional auf eine Sammlung
-eingeschränkt. Ein Klick auf einen Treffer klappt die Aktionen auf:
+Gesucht wird wahlweise **über alle Felder** – Titel, Autor:innen, Jahr,
+Abstract, Notizen, Schlagwörter, Zeitschrift, Verlag und der indizierte
+PDF-Volltext – oder eng **nur über Titel, Autor:innen und Jahr**. Der Knopf
+unter dem Suchfeld schaltet zwischen beidem um; die Voreinstellung steht in
+den Einstellungen unter *Suche*. Optional lässt sich auf eine Sammlung
+einschränken.
+
+Die Suche vergleicht Zeichenketten, sie versteht keine Bedeutung: „Klima“
+findet nicht „global warming“. Das Verstehen übernimmt Claude, nachdem die
+Treffer im Chat gelandet sind – etwa als **Kurzinfos** mit Abstract und der
+Frage, welche davon zum eigenen Thema passen.
+
+Ein Klick auf einen Treffer klappt die Aktionen auf:
 
 | Aktion | Fügt ein |
 | --- | --- |
@@ -156,6 +167,7 @@ Was in diesem Modus fehlt:
 
 | Funktion | Online verfügbar |
 | --- | --- |
+| Suche über alle Felder (auch Volltext) | ja |
 | Suche, Metadaten, Abstract | ja |
 | Zitate und Literaturverzeichnis | ja |
 | Notizen | ja |
@@ -239,6 +251,8 @@ geschwärzt und kann die Einstellungen auch nicht ändern.
 | „Zotero ist nicht erreichbar“ | Zotero starten. Falls es läuft: in Zotero unter **Bearbeiten → Einstellungen → Erweitert** die Kommunikation mit anderen Programmen aktivieren. |
 | „Das hinterlegte Token passt nicht zu Zotero“ | Token in Zotero neu kopieren (**Werkzeuge → Claude-Verbindung …**) und in den Einstellungen ersetzen. |
 | „Kein durchsuchbarer Volltext vorhanden“ | Das PDF ist ein reiner Scan ohne Texterkennung, oder Zotero hat es noch nicht indiziert. |
+| Suche findet zu viel | Mit dem Knopf unter dem Suchfeld auf „Titel, Autor:in, Jahr“ umschalten. |
+| Suche findet zu wenig | Umgekehrt auf „alle Felder“ umschalten. Für den PDF-Volltext muss Zotero den Text indiziert beziehungsweise zu zotero.org synchronisiert haben. |
 | Seitenleiste erscheint nicht | claude.ai einmal neu laden. Die Erweiterung wird erst nach dem Laden der Seite aktiv. |
 | Text landet nicht im Eingabefeld | Einmal ins Eingabefeld von Claude klicken und die Aktion wiederholen. Klappt es weiterhin nicht, liegt der Text in der Zwischenablage. |
 

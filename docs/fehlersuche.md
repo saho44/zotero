@@ -88,6 +88,19 @@ Das Token in Zotero unter **Werkzeuge → Claude-Verbindung …** neu
 kopieren und in den Einstellungen der Erweiterung ersetzen. Nach
 „Neues Token erzeugen“ ist das alte sofort ungültig.
 
+## Die Suche findet einen Titel nicht
+
+1. **Suchumfang prüfen.** Der Knopf unter dem Suchfeld zeigt an, ob nur
+   Titel, Autor:innen und Jahr durchsucht werden oder alle Felder. „Alle
+   Felder“ schließt Abstract, Notizen, Schlagwörter, Zeitschrift, Verlag
+   und den PDF-Volltext ein.
+2. **Die Suche ist wörtlich.** Sie kennt keine Synonyme: „Klima“ findet
+   nicht „global warming“. Für inhaltliche Fragen die Treffer als
+   *Kurzinfos* in den Chat einfügen und Claude danach fragen.
+3. **Im Online-Betrieb** zählt der PDF-Volltext nur mit, wenn Zotero die
+   Dateien zu zotero.org synchronisiert hat (*Einstellungen → Sync →
+   File Syncing*).
+
 ## „Kein durchsuchbarer Volltext vorhanden“
 
 Zotero hat für dieses PDF keinen Text im Index. Mögliche Gründe:

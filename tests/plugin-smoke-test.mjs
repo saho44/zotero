@@ -113,6 +113,18 @@ async function main() {
 	check("Sammlung übernommen", hit.collections[0].name === "Dissertation");
 	check("Daten wurden nachgeladen", sandbox.Zotero.Items.get(1).loadCount > 0);
 
+	const usedCondition = () => (sandbox.Zotero.lastSearchConditions || [])
+		.map(c => c.condition)
+		.find(c => String(c).startsWith("quicksearch"));
+
+	await call(sandbox, "/claude/search", { token, data: { query: "Klima", mode: "everything" } });
+	check("Modus 'everything' wird durchgereicht",
+		usedCondition() === "quicksearch-everything", String(usedCondition()));
+
+	await call(sandbox, "/claude/search", { token, data: { query: "Klima" } });
+	check("ohne Modus: nur Titel, Autor:in, Jahr",
+		usedCondition() === "quicksearch-titleCreatorYear", String(usedCondition()));
+
 	const emptyQuery = await call(sandbox, "/claude/search", { token, data: {} });
 	check("leere Suche liefert zuletzt geändert zuerst",
 		emptyQuery.body.items[0].key === "AAAA1111", emptyQuery.body.items[0]?.key);

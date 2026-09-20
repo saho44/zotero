@@ -221,6 +221,28 @@
 	outline-offset: -1px;
 }
 
+.zfc-mode {
+	align-self: flex-start;
+	padding: 3px 9px;
+	border: 1px solid var(--zfc-border);
+	border-radius: 999px;
+	background: transparent;
+	color: var(--zfc-text-soft);
+	font: inherit;
+	font-size: 11px;
+	cursor: pointer;
+}
+
+.zfc-mode:hover {
+	border-color: var(--zfc-accent);
+	color: var(--zfc-text);
+}
+
+.zfc-mode-broad {
+	border-color: var(--zfc-accent);
+	color: var(--zfc-text);
+}
+
 /* ----------------------------------------------------------- Ergebnisse */
 
 .zfc-results {

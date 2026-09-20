@@ -6,6 +6,7 @@
 const FIELDS = [
 	["token", "value"],
 	["port", "valueAsNumber"],
+	["searchMode", "value"],
 	["style", "value"],
 	["locale", "value"],
 	["fulltextChars", "valueAsNumber"],

@@ -43,7 +43,11 @@
 		selected: new Set(),
 		expanded: null,
 		busy: false,
-		status: null
+		status: null,
+		// "everything" = alle Felder inklusive Volltext, "titleCreatorYear" = nur
+		// Titel/Autor:in/Jahr. Die Voreinstellung kommt aus den Optionen, der
+		// Knopf in der Suchzeile aendert sie nur fuer diese Sitzung.
+		searchMode: "everything"
 	};
 
 	let root = null;
@@ -245,6 +249,17 @@
 		});
 		searchRow.appendChild(input);
 
+		const modeButton = el("button", "zfc-mode");
+		modeButton.type = "button";
+		modeButton.addEventListener("click", () => {
+			state.searchMode = state.searchMode === "everything"
+				? "titleCreatorYear"
+				: "everything";
+			renderSearchMode();
+			runSearch();
+		});
+		searchRow.appendChild(modeButton);
+
 		const collectionSelect = el("select", "zfc-select");
 		collectionSelect.addEventListener("change", () => {
 			state.collectionKey = collectionSelect.value;
@@ -265,8 +280,24 @@
 		root.appendChild(panel);
 
 		elements = {
-			host, launcher, panel, statusBar, input, collectionSelect, results, footer, toast
+			host, launcher, panel, statusBar, input, modeButton, collectionSelect,
+			results, footer, toast
 		};
+	}
+
+	/** Beschriftet Suchfeld und Umschalter passend zum gewaehlten Umfang. */
+	function renderSearchMode() {
+		const broad = state.searchMode === "everything";
+		elements.modeButton.textContent = broad
+			? "Suchumfang: alle Felder"
+			: "Suchumfang: Titel, Autor:in, Jahr";
+		elements.modeButton.title = broad
+			? "Durchsucht auch Abstract, Notizen, Tags, Zeitschrift, Verlag und PDF-Volltext. Klicken, um auf Titel, Autor:in und Jahr einzugrenzen."
+			: "Durchsucht nur Titel, Autor:innen und Jahr. Klicken, um alle Felder einzubeziehen.";
+		elements.modeButton.classList.toggle("zfc-mode-broad", broad);
+		elements.input.placeholder = broad
+			? "In allen Feldern suchen …"
+			: "Titel, Autor:in oder Jahr suchen …";
 	}
 
 	function showToast(message, kind = "info") {
@@ -479,6 +510,7 @@
 			type: "search",
 			query: state.query,
 			collectionKey: state.collectionKey,
+			mode: state.searchMode,
 			limit: 25
 		});
 
@@ -562,8 +594,19 @@
 	 * Start
 	 * ----------------------------------------------------------------- */
 
+	/** Holt die Voreinstellung fuer den Suchumfang aus den Optionen. */
+	async function loadSearchMode() {
+		const response = await send({ type: "getSettings" });
+		if (response.ok && response.settings && response.settings.searchMode) {
+			state.searchMode = response.settings.searchMode;
+			renderSearchMode();
+		}
+	}
+
 	function init() {
 		buildUI();
+		renderSearchMode();
+		loadSearchMode();
 		renderStatus();
 		renderResults();
 		renderFooter();

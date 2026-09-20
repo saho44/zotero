@@ -8,6 +8,11 @@ export const DEFAULT_SETTINGS = {
 	token: "",
 	port: 23119,
 
+	// Wie breit gesucht wird: "everything" durchsucht auch Abstract,
+	// Notizen, Tags, Zeitschrift, Verlag und den PDF-Volltext,
+	// "titleCreatorYear" nur Titel, Autor:innen und Jahr.
+	searchMode: "everything",
+
 	// Zitierstil
 	style: "http://www.zotero.org/styles/apa",
 	locale: "de-DE",
