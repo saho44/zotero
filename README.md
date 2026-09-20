@@ -46,7 +46,7 @@ Die fertigen Pakete liegen im Ordner [`dist/`](dist/) und lassen sich
 dort direkt herunterladen:
 
 * `zotero-claude-bridge-0.1.3.xpi` – das Zotero-Plugin
-* `zotero-fuer-claude-0.1.0.zip` – die Browser-Erweiterung
+* `zotero-fuer-claude-0.1.1.zip` – die Browser-Erweiterung
 
 Auf GitHub: Datei anklicken, dann oben rechts auf **Download raw file**.
 
@@ -88,7 +88,7 @@ Fenster zeigt außerdem, ob der lokale Server läuft.
 
 ### Schritt 4 – Browser-Erweiterung installieren
 
-1. `build/zotero-fuer-claude-0.1.0.zip` in einen Ordner entpacken
+1. `build/zotero-fuer-claude-0.1.1.zip` in einen Ordner entpacken
    (alternativ direkt den Ordner `extension/` verwenden)
 2. In Chrome/Edge `chrome://extensions` öffnen (Adresse eintippen)
 3. Rechts oben **Entwicklermodus** einschalten
@@ -182,12 +182,55 @@ wenn Zotero ihn in die Cloud synchronisiert hat.
 
 ## Datenschutz
 
-* Die Bibliotheksdaten laufen ausschließlich über `127.0.0.1` – sie
-  verlassen den Rechner nur, wenn **du** sie in den Chat einfügst.
-* Ohne gültiges Token beantwortet das Plugin keine Anfrage, andere
-  Webseiten kommen also nicht an die Bibliothek.
-* Die Online-Reserve ist standardmäßig aus.
+### Wo liegen Token und API-Schlüssel?
+
+In `chrome.storage.local` – also in einer Datei im Chrome-Profil auf dem
+eigenen Rechner, unter Windows etwa:
+
+```
+C:\Users\<Benutzer>\AppData\Local\Google\Chrome\User Data\Default\Local Extension Settings\<Kennung>\
+```
+
+Bewusst `storage.local` und **nicht** `storage.sync`: Die Werte werden
+also nicht über das Google-Konto auf andere Geräte übertragen.
+
+### Wer kann sie lesen?
+
+| | Zugriff |
+| --- | --- |
+| Die Erweiterung selbst | ja – dafür sind sie da |
+| Andere Browser-Erweiterungen | nein, Chrome trennt den Speicher je Erweiterung |
+| claude.ai oder andere Webseiten | nein (siehe unten) |
+| Anthropic | nein, die Werte werden nie in den Chat eingefügt |
+| Wer das Windows-Konto benutzt oder Administratorrechte hat | ja – die Datei ist unverschlüsselt |
+
+Webseiten können die Erweiterung nicht ansprechen: Das Manifest setzt
+kein `externally_connectable`, deshalb nimmt Chrome Nachrichten von
+Webseiten gar nicht erst an. Zusätzlich gibt der Hintergrunddienst Token
+und API-Schlüssel nur an die eigenen Seiten der Erweiterung heraus
+(Einstellungen, Popup). Das Inhaltsskript auf claude.ai bekommt sie
+geschwärzt und kann die Einstellungen auch nicht ändern.
+
+### Wohin gehen Daten?
+
+* Der API-Schlüssel geht ausschließlich als Kopfzeile `Zotero-API-Key`
+  per HTTPS an `api.zotero.org`. Er steht nie in einer Adresse, nie in
+  einer Fehlermeldung und nie im Chat.
+* Bibliotheksdaten laufen über `127.0.0.1` beziehungsweise
+  `api.zotero.org`. Sie verlassen den Rechner Richtung Anthropic nur,
+  wenn **du** einen Textbaustein in den Chat einfügst.
 * Die Erweiterung sendet nichts an Dritte und sammelt keine Statistik.
+
+### Empfehlungen
+
+* Den Schlüssel bei zotero.org **ohne Schreibrechte** anlegen. Dann kann
+  im schlimmsten Fall jemand die Bibliothek lesen, aber nichts ändern
+  oder löschen.
+* Auf einem fremden oder verwalteten Rechner: Schlüssel nach Gebrauch
+  auf <https://www.zotero.org/settings/keys> wieder löschen. Das geht
+  jederzeit und wirkt sofort.
+* Das Plugin-Token in Zotero lässt sich über **Werkzeuge →
+  Claude-Verbindung → Neues Token erzeugen** ungültig machen.
 
 ## Fehlersuche
 

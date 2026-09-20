@@ -1,7 +1,7 @@
 {
 	"manifest_version": 3,
 	"name": "Zotero für Claude",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "Durchsuche deine Zotero-Bibliothek direkt auf claude.ai und füge Zitate, Abstracts, Notizen und PDF-Volltext in den Chat ein.",
 	"permissions": [
 		"storage"

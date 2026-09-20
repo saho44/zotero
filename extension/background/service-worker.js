@@ -206,6 +206,29 @@ async function composeMultiple(action, keys) {
  * Nachrichtenempfang
  * --------------------------------------------------------------------- */
 
+/** Felder, die nie an ein Inhaltsskript auf einer Webseite gehen. */
+const SECRET_FIELDS = ["token", "webApiKey"];
+
+/**
+ * Unterscheidet Anfragen aus den eigenen Seiten der Erweiterung
+ * (Einstellungen, Popup) von denen des Inhaltsskripts auf claude.ai.
+ * Webseiten selbst koennen hier nichts einschleusen: ohne
+ * "externally_connectable" im Manifest nimmt Chrome ihre Nachrichten
+ * gar nicht erst an.
+ */
+function fromExtensionPage(sender) {
+	const prefix = chrome.runtime.getURL("");
+	return !!(sender && sender.url && sender.url.startsWith(prefix));
+}
+
+function withoutSecrets(settings) {
+	const copy = { ...settings };
+	for (const field of SECRET_FIELDS) {
+		copy[field] = settings[field] ? "\u2022".repeat(8) : "";
+	}
+	return copy;
+}
+
 const handlers = {
 	async status() {
 		return getStatus();
@@ -216,11 +239,18 @@ const handlers = {
 		return {};
 	},
 
-	async getSettings() {
-		return { settings: await getSettings(), defaults: DEFAULT_SETTINGS };
+	async getSettings(message, sender) {
+		const settings = await getSettings();
+		return {
+			settings: fromExtensionPage(sender) ? settings : withoutSecrets(settings),
+			defaults: DEFAULT_SETTINGS
+		};
 	},
 
-	async setSettings({ patch }) {
+	async setSettings({ patch }, sender) {
+		if (!fromExtensionPage(sender)) {
+			throw new Error("Einstellungen lassen sich nur auf der Optionsseite ändern.");
+		}
 		return { settings: await setSettings(patch) };
 	},
 
@@ -260,7 +290,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 		return false;
 	}
 
-	handler(message)
+	handler(message, sender)
 		.then(result => sendResponse({ ok: true, ...result }))
 		.catch((error) => {
 			console.error("[Zotero für Claude]", error);
